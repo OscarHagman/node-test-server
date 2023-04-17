@@ -3,7 +3,7 @@ import helmet from 'helmet'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 
-import sequelize from './database.js';
+import sequelize, { createTodo, getTodos } from './database.js';
 import Sample from './model.js';
 
 const app = express()
@@ -40,19 +40,25 @@ app.post('/post', (req, res) => {
 
 // MySQL
 app.get('/db/get-all-todos', async (req, res) => {
-  const samples = await Sample.findAll();
-  res.status(200).json(samples);
+  res.status(200).send(getTodos())
+  // const samples = await Sample.findAll();
+  // res.status(200).json(samples);
 })
 
 app.post('/db/create-todo', async (req, res) => {
-  try {
-    const { name, description, done } = req.body;
-    const newSample = await Sample.create({ name, description, done });
-    res.status(201).json(newSample);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: 'Error inserting data into the table' });
-  }
+  const { name } = req.body
+  
+  const results = createTodo(name, false)
+  if (results) res.status(200).send(results)
+  else res.status(500).send(results)
+  // try {
+  //   const { name, description, done } = req.body;
+  //   const newSample = await Sample.create({ name, description, done });
+  //   res.status(201).json(newSample);
+  // } catch (error) {
+  //   console.log(error);
+  //   res.status(500).json({ message: 'Error inserting data into the table' });
+  // }
 })
 
 app.put('/db/update-todo', async (req, res) => {
