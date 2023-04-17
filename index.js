@@ -3,7 +3,7 @@ import helmet from 'helmet'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 
-import sequelize, { createTodo, getTodos } from './database.js';
+import { createTodo, getTodos } from './database.js';
 // import Sample from './model.js';
 
 const app = express()
