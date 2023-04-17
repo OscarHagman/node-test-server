@@ -5,15 +5,15 @@ import cors from 'cors'
 import fs from 'fs'
 
 const app = express()
-const port = 3001
+const port = 3000
 
 app.use(helmet())
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(express.urlencoded({ limit: '100mb', extended: true }));
-app.use(express.json({ limit: '100mb' }));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 const corsOptions = {
    origin:'*', 
@@ -25,20 +25,15 @@ app.use(cors(corsOptions))
 
 
 app.get('/', (req, res) => {
-  res.status(200).send({ msg: 'Hello World!' })
+  res.status(200).send('Hello World!')
 })
 
-app.post('/write-to-file', (req, res) => {
-  const jsonData = JSON.stringify(req.body)
+app.get('/ping', (req, res) => {
+  res.status(200).send({ msg: 'pong'})
+})
 
-  fs.writeFile('output.json', jsonData, 'utf8', function (err) {
-    if (err) {
-      console.log('an error occured:\n')
-      return console.log(err)
-    }
-  })
-  console.log("Wrote to file:", jsonData)
-  res.status(200).send({msg: "ok"})
+app.post('/post', (req, res) => {
+  res.status(200).send({ res: req.body })
 })
 
 app.listen(port, () => {
