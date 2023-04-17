@@ -5,7 +5,7 @@ import cors from 'cors'
 import fs from 'fs'
 
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 
 app.use(helmet())
 
@@ -37,6 +37,6 @@ app.post('/post', (req, res) => {
 })
 
 app.listen(port, '0.0.0.0', () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Test server listening on port ${port}`)
 })
 
