@@ -69,15 +69,15 @@ app.delete('/db/delete-todo', async (req, res) => {
 
 })
 
-sequelize
-  .sync({ force: true }) // Use { force: true } only for development. It drops and recreates tables on every start.
-  .then(() => {
-    console.log('Database synced');
-    app.listen(port, '0.0.0.0', () => {
-      console.log(`Test server running on port ${port}`)
-    })
-  })
-  .catch((error) => console.log('Error syncing database:', error));
+// sequelize
+//   .sync({ force: true }) // Use { force: true } only for development. It drops and recreates tables on every start.
+//   .then(() => {
+//     console.log('Database synced');
+//     app.listen(port, '0.0.0.0', () => {
+//       console.log(`Test server running on port ${port}`)
+//     })
+//   })
+//   .catch((error) => console.log('Error syncing database:', error));
 
 
 
