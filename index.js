@@ -4,7 +4,7 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 
 import sequelize, { createTodo, getTodos } from './database.js';
-import Sample from './model.js';
+// import Sample from './model.js';
 
 const app = express()
 const port = process.env.PORT || 3000
